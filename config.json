@@ -1,0 +1,18 @@
+{
+    "port": "59613",
+    "listen_addr": "127.0.0.1:59613",
+  
+    "storage_type": "local",
+  
+    "r2_account_id": "",
+    "r2_access_key_id": "",
+    "r2_secret_access_key": "",
+    "r2_bucket": "",
+    "r2_public_base_url": "",
+  
+    "database_path": "./chat.db",
+  
+    "session_key": "tWQk3y2J8ZpYqOoKxXIbqAyz5h7M9zG/0ABcDefGhIA=",
+  
+    "allowed_origins": []
+  }
