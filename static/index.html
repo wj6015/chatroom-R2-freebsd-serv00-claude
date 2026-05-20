@@ -990,7 +990,7 @@ body {
       </div>
       <input type="file" id="fileInput" style="display:none">
       <button id="upload-btn" type="button" title="上传文件" aria-label="上传文件">+</button>
-      <textarea id="msg-input" maxlength="1000" placeholder="输入消息..." rows="1"></textarea>
+      <textarea id="msg-input" maxlength="8000" placeholder="输入消息..." rows="1"></textarea>
       <button id="send-btn">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -1011,7 +1011,7 @@ const RECONNECT_MAX_DELAY = 30000;
 const HEARTBEAT_INTERVAL = 30000;
 const HEARTBEAT_TIMEOUT = 10000;
 const MAX_PENDING_MESSAGES = 50;
-const MAX_MESSAGE_LENGTH = 1000;
+const MAX_MESSAGE_LENGTH = 8000;
 const MAX_UPLOAD_SIZE = 100 * 1024 * 1024;
 
 let myNick = '';
@@ -3312,8 +3312,8 @@ msgInput.onkeydown = e => {
 
 msgInput.addEventListener('input', () => {
   if (msgInput.value.length > MAX_MESSAGE_LENGTH) {
-    msgInput.value =
-      msgInput.value.slice(0, MAX_MESSAGE_LENGTH);
+    msgInput.value = msgInput.value.slice(0, MAX_MESSAGE_LENGTH);
+    t(`消息过长，已截断至 ${MAX_MESSAGE_LENGTH} 字符`, 'warn');   // ← 新增提示
   }
 
   autoResize();
