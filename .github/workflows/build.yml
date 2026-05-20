@@ -1,0 +1,44 @@
+name: Build FreeBSD Binary
+
+on:
+  # 只允许手动触发，不自动跑
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: '1.0'
+        required: false
+        default: 'latest'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.0'   # 根据你仓库 go.mod 里的版本调整
+
+      - name: Download dependencies
+        run: go mod download
+
+      - name: Build for FreeBSD amd64
+        env:
+          GOOS: freebsd
+          GOARCH: amd64
+          CGO_ENABLED: 0      # 禁用 CGo，确保纯静态二进制，兼容 serv00
+        run: go build -ldflags="-s -w" -o chatroom main.go
+
+      - name: Verify binary info
+        run: |
+          file chatroom
+          ls -lh chatroom
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chatroom-freebsd-amd64-${{ github.event.inputs.tag || github.run_id }}
+          path: chatroom
+          if-no-files-found: error
