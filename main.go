@@ -53,7 +53,7 @@ const (
 	pingInterval          = 25 * time.Second
 	readAckFlushInterval  = 60 * time.Second
 	maxMentionReadEntries = 2000
-	maxMessageChars       = 1000
+	maxMessageChars       = 8000
 	maxUploadBytes        = 100 << 20
 	uploadDir             = "./uploads"
 	sessionCookieName     = "chat_session"
