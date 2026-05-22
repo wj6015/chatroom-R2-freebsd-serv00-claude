@@ -158,8 +158,8 @@ export default {
     
     // 创建一个新的请求，强制修改 Host 和 Origin 以通过源站校验
     const newRequest = new Request(url, request);
-    newRequest.headers.set('Host', 'wj60192.serv00.net');
-    newRequest.headers.set('Origin', 'https://wj60192.serv00.net');
+    newRequest.headers.set('Host', 'domain.serv00.net');  // 替换你的源站域名
+    newRequest.headers.set('Origin', 'https://domain.serv00.net');  // 替换你的源站域名
     
     return fetch(newRequest);
   },
