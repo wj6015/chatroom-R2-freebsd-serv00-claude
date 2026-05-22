@@ -152,7 +152,7 @@ fi
 ```javascript
 export default {
   async fetch(request, env, ctx) {
-    const targetUrl = "https://wj60192.serv00.net"; // 你的源站域名
+    const targetUrl = "https://domain.serv00.net"; // 替换你的源站域名
     const url = new URL(request.url);
     url.hostname = new URL(targetUrl).hostname;
     
