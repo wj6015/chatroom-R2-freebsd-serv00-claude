@@ -144,3 +144,23 @@ if ! pgrep -f "/home/wj60192/chatroom" > /dev/null; then
     nohup "./$APP_NAME" >> "$LOG_FILE" 2>&1 &
 fi
 ```
+
+### 聊天室反向代理配置 (Cloudflare Worker)
+
+为了绕过domain.serv00.net域名被墙并解决 WebSocket 握手问题，使用了以下 Cloudflare Worker 代码进行反向代理：
+
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    const targetUrl = "https://wj60192.serv00.net"; // 你的源站域名
+    const url = new URL(request.url);
+    url.hostname = new URL(targetUrl).hostname;
+    
+    // 创建一个新的请求，强制修改 Host 和 Origin 以通过源站校验
+    const newRequest = new Request(url, request);
+    newRequest.headers.set('Host', 'wj60192.serv00.net');
+    newRequest.headers.set('Origin', 'https://wj60192.serv00.net');
+    
+    return fetch(newRequest);
+  },
+};
