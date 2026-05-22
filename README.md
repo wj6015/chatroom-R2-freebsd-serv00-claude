@@ -145,7 +145,7 @@ if ! pgrep -f "/home/wj60192/chatroom" > /dev/null; then
 fi
 ```
 
-### 聊天室反向代理配置 (Cloudflare Worker)
+# 聊天室反向代理配置 (Cloudflare Worker)
 
 为了绕过domain.serv00.net域名被墙并解决 WebSocket 握手问题，使用了以下 Cloudflare Worker 代码进行反向代理
 在CF worker上部署以下代码，并自定义域名
